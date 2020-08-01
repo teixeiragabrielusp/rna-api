@@ -1,0 +1,12 @@
+{
+  "name": "desafio-randon",
+  "version": "1.0.0",
+  "description": "Esse repositório contém instruções para o teste da vaga de Desenvolvedor Júnior nas Empresas Randon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
