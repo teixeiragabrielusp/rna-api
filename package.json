@@ -4,7 +4,6 @@
   "description": "Protein API in TS with PostgreSQL",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register --watch-extension ts 'test/**/*.ts'",
     "start": "npx tsc && node dist/server.js",
     "dev": "tsnd ./server.ts"
   },
