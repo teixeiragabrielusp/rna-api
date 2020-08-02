@@ -1,1 +1,1 @@
-export * from './proteins.controller'
+export * from './proteins.controller';

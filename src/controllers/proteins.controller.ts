@@ -11,6 +11,15 @@ export const listAllProteins = async (req: Request, res: Response) => {
         let limit: any = req.query.limit;
         let page: any = req.query.page;
         let offset = (page - 1) * limit;
+
+        if(!limit && !page) {
+            const response = await query('SELECT protein_accession, description, label, synonyms FROM protein_info;');
+
+            return res.status(200).json(httpResponseHelper(
+                response.rows,
+                Number(req.query.page)
+            ));
+        }
     
         const response = await query('SELECT protein_accession, description, label, synonyms FROM protein_info LIMIT $1 OFFSET $2;', [limit, offset]);
 

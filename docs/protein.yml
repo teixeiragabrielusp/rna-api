@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  description: |
+    RNA Central - Protein API - using Typescript and Postgresql
+  version: "1.0.0"
+  title: RNA Central - Protein API
+tags:
+  - name: allProteins
+    description: Listing all proteins
+  - name: specificProtein
+    description: Listing specific protein by id
+servers:
+  - url: http://localhost:3000
+    description: DEV environment
+paths:
+  /proteins:
+    get:
+      tags:
+      - allProteins
+      summary: List all proteins filtered
+      operationId: getProteinsFiltered
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Page size
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: The page position to display elements
+
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+  /proteins/{id}:
+    get:
+      tags:
+      - specificProtein
+      summary: List protein by id
+      operationId: getProteinsById
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: Protein ID (protein_accession)
+        required: true
+
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+components:
+  schemas:
+    ApiResponseSingle:
+      type: object
+      properties:
+        data:
+          type: object
+          format: json
+    ApiResponseCollection:
+      type: object
+      properties:
+        items:
+          type: array
+        page:
+          type: integer
+        size:
+          type: integer
