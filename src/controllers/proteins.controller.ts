@@ -9,9 +9,12 @@ import {
 //SELECT protein_accession, description, label, synonyms FROM protein_info;'
 
 export const listAllProteins = async (req: Request, res: Response) => {
-    let limit = 2;
-    // let direction = 'DESC'
-    const response = await query('SELECT protein_accession, description, label, synonyms FROM protein_info LIMIT $1;', [limit]);
+
+    let limit: any = req.query.limit;
+    let page: any = req.query.page;
+    let offset = (page - 1) * limit;
+
+    const response = await query('SELECT protein_accession, description, label, synonyms FROM protein_info LIMIT $1 OFFSET $2;', [limit, offset]);
     console.log(response.rowCount)
     res.status(200).json(httpResponseHelper(
         response.rows,
@@ -26,8 +29,8 @@ export const listProteinById = async (req: Request, res: Response) => {
 
     if(response.rowCount === 0) 
         return res.status(404).json(httpErrorHelper({
-            code: 401,
-            message: 'Id not found!'
+            code: 404,
+            message: 'ID NOT FOUND'
         }));
         
     return res.status(200).json(httpResponseHelper(
