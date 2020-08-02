@@ -15,4 +15,4 @@ pool.on('connect', () => {
 
 const query = (text: string, params?: any) => pool.query(text, params);
 
-export default query
+export default query;

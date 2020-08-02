@@ -1,10 +1,13 @@
 import express from 'express';
 import {
-    listAllProteins
+    listAllProteins,
+    listProteinById
 } from '../controllers/index';
 
 let router = express.Router();
 
-router.get('/', listAllProteins);
+router.get('/proteins', listAllProteins);
+
+router.get('/proteins/:id', listProteinById);
 
 export default router;
